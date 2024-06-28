@@ -18,7 +18,7 @@ sleep 5
 echo "Resetting MySQL root password..."
 sudo mysql -u root <<EOF
 USE mysql;
-UPDATE user SET authentication_string=PASSWORD('$NEW_ROOT_PASS') WHERE User='root';
+UPDATE mysql.user SET authentication_string=PASSWORD('$NEW_ROOT_PASS'), plugin='mysql_native_password' WHERE User='root';
 FLUSH PRIVILEGES;
 EXIT;
 EOF
