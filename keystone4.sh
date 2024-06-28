@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set variables
-DB_ROOT_PASS="root_db_pass"  # Change this to your MySQL root password
+DB_ROOT_PASS="new_password"  # Change this to your new MySQL root password
 KEYSTONE_DBPASS="keystone_db_pass"  # Change this to your Keystone DB password
 ADMIN_PASS="admin_pass"  # Change this to your admin password
 CONTROLLER_HOST="192.168.12.144"  # Change this to your controller node hostname or IP
@@ -53,9 +53,9 @@ sudo keystone-manage credential_setup --keystone-user keystone --keystone-group 
 
 # Bootstrap the Identity Service
 sudo keystone-manage bootstrap --bootstrap-password $ADMIN_PASS \
-  --bootstrap-admin-url http://$CONTROLLER_HOST:5001/v3/ \
-  --bootstrap-internal-url http://$CONTROLLER_HOST:5001/v3/ \
-  --bootstrap-public-url http://$CONTROLLER_HOST:5001/v3/ \
+  --bootstrap-admin-url http://$CONTROLLER_HOST:5000/v3/ \
+  --bootstrap-internal-url http://$CONTROLLER_HOST:5000/v3/ \
+  --bootstrap-public-url http://$CONTROLLER_HOST:5000/v3/ \
   --bootstrap-region-id RegionOne
 
 # Restart Apache
@@ -68,7 +68,7 @@ export OS_PASSWORD=$ADMIN_PASS
 export OS_PROJECT_NAME=admin
 export OS_USER_DOMAIN_NAME=Default
 export OS_PROJECT_DOMAIN_NAME=Default
-export OS_AUTH_URL=http://$CONTROLLER_HOST:5001/v3
+export OS_AUTH_URL=http://$CONTROLLER_HOST:5000/v3
 export OS_IDENTITY_API_VERSION=3
 EOF
 
